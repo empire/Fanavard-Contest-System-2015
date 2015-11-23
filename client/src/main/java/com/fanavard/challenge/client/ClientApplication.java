@@ -1,5 +1,8 @@
 package com.fanavard.challenge.client;
 
+import com.fanavard.challenge.client.socket.SocketClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,7 +10,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ClientApplication implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(ClientApplication.class);
     public void run() {
-        System.out.println("Starting client");
+        logger.debug("Starting client");
+        try {
+            SocketClient.main(new String[]{});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

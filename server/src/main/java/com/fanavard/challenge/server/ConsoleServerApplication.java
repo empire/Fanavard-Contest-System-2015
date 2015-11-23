@@ -1,6 +1,7 @@
 package com.fanavard.challenge.server;
 
 import com.fanavard.challenge.game.GameManager;
+import com.fanavard.challenge.server.socket.SocketServer;
 import com.fanavard.challenge.words.repository.WordRepositoryManager;
 import com.fanavard.challenge.words.util.WordLoader;
 import org.slf4j.Logger;
@@ -24,13 +25,16 @@ public class ConsoleServerApplication implements ServerApplication {
     @Autowired
     GameManager gameManager;
 
+    @Autowired
+    SocketServer socketServer;
+
     public void run() {
         logger.debug("Server application is started!");
         wordLoader.loadFromFile("flowers", "flowers.txt");
         logger.debug("contains word {}", repositoryManager.getRepository("flowers").contains("کوکب"));
         gameManager.games();
         try {
-            DiscardServer.main(new String[] {});
+            socketServer.run();
         } catch (Exception e) {
             e.printStackTrace();
         }
