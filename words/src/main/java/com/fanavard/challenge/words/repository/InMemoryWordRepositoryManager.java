@@ -22,7 +22,6 @@ class InMemoryWordRepositoryManager implements WordRepositoryManager {
     }
 
     public synchronized WordRepository getRepository(String repositoryName) {
-        logger.debug("not available {}", this.repositories);
         if (!containsRepository(repositoryName)) {
             addNewRepository(repositoryName);
         }

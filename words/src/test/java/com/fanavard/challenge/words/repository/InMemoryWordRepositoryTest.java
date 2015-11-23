@@ -25,6 +25,6 @@ public class InMemoryWordRepositoryTest {
     @Test
     public void testContainsMustNotContainsAddedWord() throws Exception {
         wordRepository.add(WORD);
-        assertFalse(wordRepository.contains(WORD));
+        assertTrue(wordRepository.contains(WORD));
     }
 }

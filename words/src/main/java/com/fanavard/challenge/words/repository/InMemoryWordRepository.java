@@ -16,8 +16,6 @@ public class InMemoryWordRepository implements WordRepository {
     private final Set<String> words = new HashSet<>();
 
     public boolean contains(String word) {
-        logger.debug("Check contains {}", words);
-        logger.debug("Check contains {}", word);
         return words.contains(word);
     }
 
