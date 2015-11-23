@@ -23,7 +23,6 @@ public class InMemoryWordRepository implements WordRepository {
 
     @Override
     public void add(String word) {
-        logger.debug("Adding word '{}'", word);
         words.add(word);
     }
 
