@@ -1,10 +1,6 @@
 package com.fanavard.challenge.repository.provider;
 
-import com.fanavard.challenge.repository.exception.IOException;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.Reader;
 import java.util.Scanner;
 
 /**
@@ -26,11 +22,8 @@ class FileWordProvider implements WordProvider, AutoCloseable {
         scanner.close();
     }
 
-    void open(String filename) {
-        try {
-            scanner = new Scanner(new BufferedReader(new FileReader(filename)));
-        } catch (FileNotFoundException e) {
-            new IOException(e);
-        }
+
+    void open(Reader reader) {
+        scanner = new Scanner(reader);
     }
 }
