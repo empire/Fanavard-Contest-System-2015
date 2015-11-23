@@ -1,4 +1,4 @@
-package com.fanavard.challenge.repository.provider;
+package com.fanavard.challenge.words.provider;
 
 import java.io.Reader;
 import java.util.Scanner;

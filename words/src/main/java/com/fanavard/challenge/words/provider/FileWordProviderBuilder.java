@@ -1,6 +1,6 @@
-package com.fanavard.challenge.repository.provider;
+package com.fanavard.challenge.words.provider;
 
-import com.fanavard.challenge.repository.exception.IOException;
+import com.fanavard.challenge.words.exception.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

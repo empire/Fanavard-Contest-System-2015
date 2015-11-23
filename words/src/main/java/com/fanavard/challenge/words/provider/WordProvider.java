@@ -1,4 +1,4 @@
-package com.fanavard.challenge.repository.provider;
+package com.fanavard.challenge.words.provider;
 
 /**
  * Created by ITRENT2 on 11/23/2015.

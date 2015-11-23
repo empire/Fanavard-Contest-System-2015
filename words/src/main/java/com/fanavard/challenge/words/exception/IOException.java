@@ -1,6 +1,4 @@
-package com.fanavard.challenge.repository.exception;
-
-import java.io.FileNotFoundException;
+package com.fanavard.challenge.words.exception;
 
 /**
  * Created by ITRENT2 on 11/23/2015.

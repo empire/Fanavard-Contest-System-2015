@@ -1,4 +1,4 @@
-package com.fanavard.challenge.repository.provider;
+package com.fanavard.challenge.words.provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

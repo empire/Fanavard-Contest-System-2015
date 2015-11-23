@@ -11,7 +11,7 @@
 
     <modules>
         <module>application</module>
-        <module>respository</module>
+        <module>words</module>
         <module>server</module>
     </modules>
 

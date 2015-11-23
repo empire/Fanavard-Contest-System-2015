@@ -1,9 +1,9 @@
 package com.fanavard.challenge.server;
 
-import com.fanavard.challenge.repository.exception.IOException;
-import com.fanavard.challenge.repository.provider.FileWordProviderBuilder;
-import com.fanavard.challenge.repository.provider.WordProvider;
-import com.fanavard.challenge.repository.provider.WordProviderBuilder;
+import com.fanavard.challenge.words.exception.IOException;
+import com.fanavard.challenge.words.provider.FileWordProviderBuilder;
+import com.fanavard.challenge.words.provider.WordProvider;
+import com.fanavard.challenge.words.provider.WordProviderBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,15 @@ public class ConsoleServerApplication implements ServerApplication {
 
     public void start(String[] args) {
         logger.debug("Server application is started!");
-        WordProviderBuilder builder = context.getBean(FileWordProviderBuilder.class, getAbsolutePath("flowers.txt"));
-        WordProvider wordProvider = builder.build();
+        loadFromFile("flowers.txt");
+    }
+
+    private void loadFromFile(String filename) {
+        WordProviderBuilder builder = context.getBean(FileWordProviderBuilder.class, getAbsolutePath(filename));
+        loadFromWordProvider(builder.build());
+    }
+
+    private void loadFromWordProvider(WordProvider wordProvider) {
         while (wordProvider.hasNext()) {
             System.out.println(wordProvider.next());
         }
