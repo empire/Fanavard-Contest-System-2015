@@ -12,7 +12,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.serialization.ClassResolver;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,6 +26,9 @@ public class SocketServer {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
     private ServerBootstrap serverBootstrap;
+
+    @Autowired
+    ApplicationContext context;
 
 //    @Autowired
 //    SocketServerHandler socketServerHandler;
@@ -46,7 +53,9 @@ public class SocketServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                     @Override
                     public void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new SocketServerHandler());
+                        ch.pipeline().addLast(
+                                new ObjectDecoder(ClassResolvers.weakCachingConcurrentResolver(null)),
+                                new SocketServerHandler());
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)          // (5)
