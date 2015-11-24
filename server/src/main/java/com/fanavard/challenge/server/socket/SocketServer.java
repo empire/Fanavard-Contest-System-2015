@@ -15,6 +15,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolver;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -54,8 +55,9 @@ public class SocketServer {
                     @Override
                     public void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline().addLast(
+                                new ObjectEncoder(),
                                 new ObjectDecoder(ClassResolvers.weakCachingConcurrentResolver(null)),
-                                new SocketServerHandler());
+                                context.getBean(SocketServerHandler.class));
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)          // (5)

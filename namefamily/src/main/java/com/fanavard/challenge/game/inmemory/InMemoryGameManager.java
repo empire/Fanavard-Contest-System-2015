@@ -2,6 +2,7 @@ package com.fanavard.challenge.game.inmemory;
 
 import com.fanavard.challenge.game.GameManager;
 import com.fanavard.challenge.game.NameFamilyGame;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
  * Created by ITRENT2 on 11/23/2015.
  */
 @Component
+@Scope("singleton")
 public class InMemoryGameManager implements GameManager {
     private Map<Integer, NameFamilyGame> games = new HashMap<>();
 

@@ -13,6 +13,8 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,42 +26,14 @@ import java.util.Scanner;
 
 @Component
 public class SocketClientHandler extends ChannelHandlerAdapter {
-//    private ByteBuf buf;
+    private static final Logger logger = LoggerFactory.getLogger(SocketClientHandler.class);
 
     @Autowired
     CliApplication cliApplication;
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) {
-//        buf = ctx.alloc().buffer(4); // (1)
-
-      }
-
-    @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) {
-//        buf.release(); // (1)
-//        buf = null;
-    }
-
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        cliApplication.run(ctx);
-    }
-
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-//        ByteBuf m = (ByteBuf) msg;
-//        System.out.println(m.toString(CharsetUtil.UTF_8));
-//
-        ctx.write(msg);
-
-//        ByteBuf buffer = Unpooled.copiedBuffer("[3]", CharsetUtil.UTF_8);
-//        ctx.writeAndFlush(buffer);
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.flush();
+        cliApplication.dataReceived(msg);
     }
 
     @Override

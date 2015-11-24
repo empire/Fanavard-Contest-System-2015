@@ -1,6 +1,6 @@
-package com.fanavard.challenge.client.cli.states;
+package com.fanavard.challenge.client.cli.options;
 
-import com.fanavard.challenge.client.cli.options.CliStateOption;
+import com.fanavard.challenge.client.cli.states.State;
 import com.fanavard.challenge.core.commands.Commander;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

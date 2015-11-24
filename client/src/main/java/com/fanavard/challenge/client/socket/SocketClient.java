@@ -1,17 +1,19 @@
 package com.fanavard.challenge.client.socket;
 
+import com.fanavard.challenge.client.cli.CliApplication;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * Created by ocean on 11/23/15.
@@ -22,6 +24,9 @@ public class SocketClient {
     private final int port = 8080;
     private Bootstrap b;
     private NioEventLoopGroup workerGroup;
+
+    @Autowired
+    CliApplication cliApplication;
 
     @Autowired
     ApplicationContext context;
@@ -45,8 +50,11 @@ public class SocketClient {
         // Start the client.
         ChannelFuture f = b.connect(host, port).sync(); // (5)
 
+        Channel channel = f.channel();
+        cliApplication.run(channel);
+
         // Wait until the connection is closed.
-        f.channel().closeFuture().sync();
+        channel.closeFuture().sync();
     }
 
     private void configureServer() {
@@ -58,6 +66,7 @@ public class SocketClient {
             public void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline().addLast(
                         new ObjectEncoder(),
+                        new ObjectDecoder(ClassResolvers.weakCachingConcurrentResolver(null)),
                         context.getBean(SocketClientHandler.class)
                         );
             }

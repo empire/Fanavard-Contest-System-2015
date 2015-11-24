@@ -1,5 +1,7 @@
 package com.fanavard.challenge.client.cli.states;
 
+import com.fanavard.challenge.client.cli.options.AbstractOptionsCollection;
+import com.fanavard.challenge.client.cli.options.OptionsCollection;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
