@@ -1,6 +1,7 @@
 package com.fanavard.challenge.client.cli.states;
 
 import com.fanavard.challenge.client.cli.options.CliStateOption;
+import com.fanavard.challenge.core.commands.Commander;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ public class ConcreteOptionsCollection extends AbstractOptionsCollection {
     }
 
     @Override
-    protected State getSelectedState() {
+    protected State getSelectedState(Commander commander) {
         return getStateByIndex(choice);
     }
 

@@ -43,7 +43,7 @@ public class SocketClientHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        cliApplication.run();
+        cliApplication.run(ctx);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.fanavard.challenge.client.cli.states;
 
 import com.fanavard.challenge.client.cli.options.CliStateOption;
+import com.fanavard.challenge.core.commands.Commander;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +19,12 @@ public abstract class AbstractOptionsCollection implements OptionsCollection {
         return new ConcreteOptionsCollection();
     }
 
-    public State getNextState() {
+    public State getNextState(Commander commander) {
         while (!getValidInputFromUser()) {
         }
-        return getSelectedState();
+        return getSelectedState(commander);
     }
 
-    protected abstract State getSelectedState();
+    protected abstract State getSelectedState(Commander commander);
     protected abstract boolean getValidInputFromUser();
 }

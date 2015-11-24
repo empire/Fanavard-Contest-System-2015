@@ -1,5 +1,7 @@
 package com.fanavard.challenge.client.cli.states;
 
+import com.fanavard.challenge.core.commands.Commander;
+import com.fanavard.challenge.core.model.InitGameCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -15,14 +17,16 @@ import java.util.Scanner;
 public class NewGameState implements State {
     @Autowired
     ApplicationContext context;
+
     private int numberOfPlayers;
 
     @Override
     public AbstractOptionsCollection getOptions() {
         return new AbstractOptionsCollection() {
             @Override
-            protected State getSelectedState() {
-                return null;
+            protected State getSelectedState(Commander commander) {
+                commander.sendAsyncCommand(new InitGameCommand(numberOfPlayers));
+                return context.getBean(StartState.class);
             }
 
             @Override
