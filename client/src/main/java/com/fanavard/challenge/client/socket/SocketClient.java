@@ -1,6 +1,7 @@
 package com.fanavard.challenge.client.socket;
 
 import com.fanavard.challenge.client.cli.CliApplication;
+import com.fanavard.challenge.core.config.ServerConfig;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -20,8 +21,9 @@ import java.util.Date;
  */
 @Component
 public class SocketClient {
-    private final String host = "127.0.0.1";
-    private final int port = 8080;
+    private final String host = ServerConfig.HOST_NAME;
+    private final int port = ServerConfig.PORT_NUMBER;
+
     private Bootstrap b;
     private NioEventLoopGroup workerGroup;
 

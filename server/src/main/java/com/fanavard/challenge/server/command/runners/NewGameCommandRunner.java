@@ -23,7 +23,8 @@ public class NewGameCommandRunner implements CommandRunner<NewGameCommand> {
 
     @Override
     public CommandResponse run(NewGameCommand command) {
-        return new NewGameResponse(gameManager.newGame(command.getPlayersCount()).getIdentifier());
+        return new NewGameResponse(
+                gameManager.newGame(command.getPlayersCount()).getIdentifier());
     }
 
     @Override

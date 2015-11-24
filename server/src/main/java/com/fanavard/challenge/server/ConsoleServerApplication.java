@@ -32,7 +32,6 @@ public class ConsoleServerApplication implements ServerApplication {
         logger.debug("Server application is started!");
         wordLoader.loadFromFile("flowers", "flowers.txt");
         logger.debug("contains word {}", repositoryManager.getRepository("flowers").contains("کوکب"));
-        gameManager.games();
         try {
             socketServer.run();
         } catch (Exception e) {

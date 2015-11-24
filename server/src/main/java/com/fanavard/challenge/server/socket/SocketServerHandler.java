@@ -35,7 +35,6 @@ public class SocketServerHandler extends ChannelHandlerAdapter { // (1)
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         if (!(msg instanceof Command)) {
             logger.warn("Invalid data is received (instance of Command wanted) {}", msg.getClass());
-            ctx.writeAndFlush(msg.toString());
             return;
         }
 
