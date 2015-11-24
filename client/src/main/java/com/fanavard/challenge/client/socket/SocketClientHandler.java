@@ -33,7 +33,7 @@ public class SocketClientHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        cliApplication.dataReceived(msg);
+        cliApplication.dataReceived(ctx.channel(), msg);
     }
 
     @Override

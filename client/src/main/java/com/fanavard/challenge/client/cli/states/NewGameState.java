@@ -27,7 +27,7 @@ public class NewGameState implements State {
             @Override
             protected State getSelectedState(Commander commander) {
                 commander.sendAsyncCommand(new NewGameCommand(numberOfPlayers));
-                return context.getBean(StartState.class);
+                return context.getBean(WaitForStartingOfGameState.class);
             }
 
             @Override
