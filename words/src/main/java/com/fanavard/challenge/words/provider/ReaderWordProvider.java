@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Created by ITRENT2 on 11/23/2015.
  */
 
-class FileWordProvider implements WordProvider, AutoCloseable {
+class ReaderWordProvider implements WordProvider, AutoCloseable {
     private Scanner scanner;
 
     public boolean hasNext() {

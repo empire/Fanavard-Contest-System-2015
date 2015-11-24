@@ -4,8 +4,6 @@ import com.fanavard.challenge.words.exception.IOException;
 import com.fanavard.challenge.words.provider.FileWordProviderBuilder;
 import com.fanavard.challenge.words.provider.WordProvider;
 import com.fanavard.challenge.words.provider.WordProviderBuilder;
-import com.fanavard.challenge.words.repository.WordRepository;
-import com.fanavard.challenge.words.repository.WordRepositoryManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +16,20 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("singleton")
-public class WordLoader {
+public class WordLoader extends AbstractWordLoader {
     private static final Logger logger = LoggerFactory.getLogger(WordLoader.class);
 
     @Autowired
     ApplicationContext context;
 
-    @Autowired
-    WordRepositoryManager repositoryManager;
-
     public void loadFromFile(String repositoryName, String filename) {
-        addToRepository(filename, getWordRepository(repositoryName));
+        addFileContentsToRepository(filename, repositoryName);
     }
 
-    private void addToRepository(String filename, WordRepository repository) {
+    private void addFileContentsToRepository(String filename, String repository) {
         logger.debug("Load from file {}", filename);
         WordProvider wordProvider = getWordProviderFromFileName(filename);
-        repository.addAll(wordProvider);
-    }
-
-    private WordRepository getWordRepository(String repositoryName) {
-        return repositoryManager.getRepository(repositoryName);
+        addFromWordProvider(repository, wordProvider);
     }
 
     private WordProvider getWordProviderFromFileName(String filename) {

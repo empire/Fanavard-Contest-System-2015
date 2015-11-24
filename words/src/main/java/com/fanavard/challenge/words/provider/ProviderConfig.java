@@ -19,4 +19,11 @@ public class ProviderConfig {
         logger.debug("get build for file: '{}'", filename);
         return new FileWordProviderBuilder(filename);
     }
+
+    @Bean
+    @Scope("prototype")
+    UrlWordProviderBuilder getUrlWordProviderBuilder(String urlPath) {
+        logger.debug("get build for url path: '{}'", urlPath);
+        return new UrlWordProviderBuilder(urlPath);
+    }
 }

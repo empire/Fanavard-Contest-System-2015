@@ -21,9 +21,9 @@ public class FileWordProviderBuilder implements WordProviderBuilder {
 
     public WordProvider build() {
         logger.debug("Building WordProvider");
-        FileWordProvider fileWordProvider = new FileWordProvider();
-        fileWordProvider.open(getReader());
-        return fileWordProvider;
+        ReaderWordProvider readerWordProvider = new ReaderWordProvider();
+        readerWordProvider.open(getReader());
+        return readerWordProvider;
     }
 
     private BufferedReader getReader() {
